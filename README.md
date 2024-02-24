@@ -18,3 +18,4 @@
 
 # Screenshots
 
+<img src="./src/assets/empty.png" />
