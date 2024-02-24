@@ -5,11 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../src/progress.css">
 </head>
 
 <body class="w-full h-full bg-[#141414]">
     <script src="../src/tailwind.js"></script>
     <div class="w-full">
+        <div id="progress"
+            class="fixed z-[9999] w-full h-full bg-[rgba(0,0,0,.4)] hidden items-center justify-center flex-col">
+            <div class="text-white text-lg">
+                Compressing And Downloading
+            </div>
+            <div class="w-6/12">
+                <div class="container">
+                    <div class="progress progress-infinite">
+                        <div class="progress-bar3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="px-3 py-6 border-b border-lime-400">
             <label for="" class="text-lime-400 my-1">Your IP</label>
             <div id="yourIp" class="px-8 bg-[#242424] py-2 shadow-inner shadow-black text-center text-lime-400">

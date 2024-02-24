@@ -1,5 +1,7 @@
 const { exec } = require('child_process');
 const { ipcRenderer } = require('electron')
+const fs = require('fs');
+const path = require('path');
 
 const command = 'ipconfig | findstr /i "IPv4"';
 
@@ -31,10 +33,24 @@ let fileName = '';
 let downloadButton = document.getElementById('downloadButton');
 
 downloadButton.addEventListener('click', () => {
+    document.getElementById('progress').style.display = 'flex'
     ipcRenderer.invoke('downloadFile', { url: `http://${ipAdress}:3000/download/${fileName}`, fileName: fileName })
         .then(res => {
 
         })
+    // const pathForParent = path.join(__dirname, '..')
+    const filePath = path.join(__dirname, '..', 'download', `${fileName}.zip`);
+    const int = setInterval(() => {
+        fs.access(filePath, fs.constants.F_OK, (err) => {
+            if (err) {
+                console.error(`Dosya bulunamadı: ${err.message}`);
+                // İsterseniz interval'ı burada temizleyebilirsiniz
+            } else {
+                document.getElementById('progress').style.display = 'none';
+                clearInterval(int);
+            }
+        });
+    }, 1000);
 })
 
 
