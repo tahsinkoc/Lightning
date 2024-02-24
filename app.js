@@ -70,6 +70,7 @@ function createWindow() {
             devTools: true,
             nodeIntegration: true
         },
+        icon: './src/assets/lght.ico'
     });
 
     win.loadFile('./windows/index.html');
