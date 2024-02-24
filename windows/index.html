@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body class="w-full h-full bg-[#141414]">
+    <script src="../src/tailwind.js"></script>
+    <div class="w-full">
+        <div class="px-3 py-6 border-b border-lime-400">
+            <label for="" class="text-lime-400 my-1">Your IP</label>
+            <div id="yourIp" class="px-8 bg-[#242424] py-2 shadow-inner shadow-black text-center text-lime-400">
+
+            </div>
+        </div>
+        <div class="p-3">
+            <label for="" class="text-lime-400 my-1">Enter IP Adress of Source</label>
+            <div class="bg-[#242424] shadow-inner shadow-black text-center text-lime-400">
+                <input type="text" name="" id="targetIp" placeholder="Enter IP Adress of Source"
+                    class="w-full h-full bg-transparent border-none outline-none p-2">
+            </div>
+            <button id="saveIpButton" class="py-1 my-2 w-full shadow-md bg-lime-700 rounded text-lime-200">Save
+                IP</button>
+        </div>
+        <div class="px-3">
+            <div class="py-2 px-4 shadow-black shadow-inner bg-[#242424] flex items-center text-white">
+                <label for="">Selected File: </label>
+                <span class="ml-2" id="selectedFile">None</span>
+            </div>
+            <button class="mx-auto py-1 my-2 w-full shadow-md bg-lime-700 rounded text-lime-200">Download</button>
+        </div>
+        <div id="parentDivOfFiles" class="w-full py-6 px-3 my-2 grid grid-cols-5 gap-y-4 gap-x-8 text-center">
+
+        </div>
+    </div>
+    <script src="../src/script.js"></script>
+</body>
+
+</html>
