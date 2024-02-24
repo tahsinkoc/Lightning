@@ -1,5 +1,5 @@
 const { exec } = require('child_process');
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, shell } = require('electron')
 const fs = require('fs');
 const path = require('path');
 
@@ -37,6 +37,8 @@ downloadButton.addEventListener('click', () => {
     ipcRenderer.invoke('downloadFile', { url: `http://${ipAdress}:3000/download/${fileName}`, fileName: fileName })
     ipcRenderer.on('file-downloaded', (event, data) => {
         document.getElementById('progress').style.display = 'none';
+        let pth = path.join(__dirname, '..', 'download')
+        shell.openPath(pth);
     })
     // const pathForParent = path.join(__dirname, '..')
     // const filePath = path.join(__dirname, '..', 'download', `${fileName}.zip`);
@@ -79,4 +81,17 @@ saveIpButton.addEventListener('click', () => {
                 parentDivOfFiles.appendChild(div);
             })
         })
+})
+
+
+let storeFolder = document.getElementById('storeFolder');
+let downloadsFolder = document.getElementById('downloadsFolder')
+storeFolder.addEventListener('click', () => {
+    const selectedDirectory = path.join(__dirname, '..', 'upload');
+    shell.openPath(selectedDirectory);
+})
+
+downloadsFolder.addEventListener('click', () => {
+    const selectedDirectory = path.join(__dirname, '..', 'download');
+    shell.openPath(selectedDirectory);
 })
