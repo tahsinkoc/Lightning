@@ -5,6 +5,8 @@ const path = require('path');
 const eapp = express();
 const archiver = require('archiver');
 const { spawn } = require('child_process');
+const axios = require('axios')
+
 eapp.use(express.json());
 
 eapp.get('/files', async (req, res) => {
@@ -109,22 +111,26 @@ function extractProgress(data) {
 }
 
 ipcMain.handle('downloadFile', async (event, data) => {
+    axios({
+        method: 'get',
+        url: data.url,
+        responseType: 'stream',
+    }).then(response => {
+        const filepath = path.join(__dirname, `download`, `${data.fileName}.zip`);
+        const outputStream = fs.createWriteStream(filepath);
+        response.data.pipe(outputStream);
 
-    console.log(data.url);
-    const filepath = path.join(__dirname, `download`, `${data.fileName}.zip`);
+        outputStream.on('finish', () => {
+            event.sender.send('file-downloaded', data.fileName);
+        });
 
-    // Execute a shell command to download the file
-    const curlProcess = spawn('curl', [data.url, '--output', filepath]);
-    // curlProcess.stdout.on('data', extractProgress);
-    curlProcess.on('close', (code) => {
-        if (code === 0) {
-            // Send a response to the renderer process
-            event.sender.send('download-response', filepath);
-        } else {
-            console.error('File download error:', code);
-            event.sender.send('download-response', null);
-        }
+        outputStream.on('error', (err) => {
+            console.error('Dosya indirme hatası:', err);
+            event.sender.send('dosya-indirme-hatasi', 'Dosya indirme hatası');
+        });
+    }).catch(error => {
+        console.error('İstek hatası:', error);
+        event.sender.send('istek-hatasi', 'İstek hatası');
     });
-    return 'aa'
 
 })
