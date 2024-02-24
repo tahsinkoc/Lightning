@@ -26,19 +26,32 @@ exec(command, (error, stdout, stderr) => {
 
 const classNameOfFileDiv = 'cursor-pointer shadow-md shadow-black border border-lime-700 px-8 py-2 text-white rounded-sm';
 
+let ipAdress = '';
+let fileName = '';
+let downloadButton = document.getElementById('downloadButton');
+
+downloadButton.addEventListener('click', () => {
+    ipcRenderer.invoke('downloadFile', { url: `http://${ipAdress}:3000/download/${fileName}`, fileName: fileName })
+        .then(res => {
+
+        })
+})
+
 
 function onClickEventOfFileDivs(parameter) {
     document.getElementById('selectedFile').textContent = parameter;
+    fileName = parameter;
 }
 
 let saveIpButton = document.getElementById('saveIpButton');
-
+let parentDivOfFiles = document.getElementById('parentDivOfFiles')
 saveIpButton.addEventListener('click', () => {
     let targetIpAdress = document.getElementById('targetIp').value;
     const fetchUrl = `http://${targetIpAdress}:3000/files`;
-
+    ipAdress = targetIpAdress;
     ipcRenderer.invoke('fetchData', fetchUrl)
         .then(res => {
+            parentDivOfFiles.textContent = '';
             res.forEach(item => {
                 let div = document.createElement('button');
                 div.textContent = item.name;
