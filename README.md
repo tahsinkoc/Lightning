@@ -12,3 +12,9 @@
 - On the computer you wish to receive the file, start the application and enter the shown IP address.
 - Click the "Download" button to list files in the "upload" folder.
 - Select the desired file and download it as a compressed archive.
+
+# Installation
+**Since this is a release version, there is no need for additional installations. Simply download and run the application.**
+
+# Screenshots
+
