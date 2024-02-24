@@ -19,3 +19,5 @@
 # Screenshots
 
 <img src="./src/assets/empty.png" />
+
+<img src="./src/assets/filled.png" />
