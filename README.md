@@ -2,7 +2,7 @@
 
 ## Lightning P2P File Transfer Application
 
-**This application enables peer-to-peer file transfer using the HTTP protocol. Developed with Node.js and Electron, it allows for fast file exchange between two computers.**
+**This application enables peer-to-peer file transfer using the HTTP protocol. Developed with Node.js and Electron, it allows for fast file exchange between two computers..**
 
 ## Usage
 
